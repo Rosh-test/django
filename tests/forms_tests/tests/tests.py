@@ -302,8 +302,6 @@ class FormsModelTestCase(TestCase):
         self.assertEqual(instance_form.initial["def_date"], datetime.date(1969, 4, 4))
         self.assertEqual(instance_form.initial["value"], 12)
 
-        from django.forms import CharField
-
         class ExcludingForm(ModelForm):
             name = CharField(max_length=255)
 

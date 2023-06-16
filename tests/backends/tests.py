@@ -765,9 +765,6 @@ class ThreadTests(TransactionTestCase):
         connections_dict[id(connection)] = connection
 
         def runner():
-            # Passing django.db.connection between threads doesn't work while
-            # connections[DEFAULT_DB_ALIAS] does.
-            from django.db import connections
 
             connection = connections[DEFAULT_DB_ALIAS]
             # Allow thread sharing so the connection can be closed by the
@@ -806,7 +803,6 @@ class ThreadTests(TransactionTestCase):
             connections_dict[id(conn)] = conn
 
         def runner():
-            from django.db import connections
 
             for conn in connections.all():
                 # Allow thread sharing so the connection can be closed by the
@@ -841,7 +837,6 @@ class ThreadTests(TransactionTestCase):
 
         def do_thread():
             def runner(main_thread_connection):
-                from django.db import connections
 
                 connections["default"] = main_thread_connection
                 try:
